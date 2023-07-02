@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <title>{{ name }}</title>
+</head>
+<body>
+
+  <style>
+    .north-container{
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+  </style>
+    
+  <div class="north-container">
+    <!--
+        Navbar
+    -->
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark m-nav" style="color: white !important;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'blog-home' %}">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'blog-home' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Account
+                </a>
+                <ul class="dropdown-menu">
+                  {% if request.user.is_authenticated %}
+                    <li><a class="dropdown-item" href="{% url 'user-account' %}">My Account</a></li>
+                    <li><a class="dropdown-item" href="{% url 'user-register' %}">Chat Rooms</a></li>
+                  {% else %}
+                    <li><a class="dropdown-item" href="{% url 'user-login' %}">Sign In</a></li>
+                    <li><a class="dropdown-item" href="{% url 'user-register' %}">Sign Up</a></li>
+                  {% endif %}
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+     <style>
+      .user-nav>*{
+          gap: 2%;
+          border-bottom: 1px solid rgb(70, 70, 70);
+          padding-bottom: 10px;
+        }
+        .user-offcnvs{
+          background-color: black;
+          color: white;
+        }
+
+      .user-nav{
+        background-color: black !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+        .dropdown-item{
+            color: black !important;
+        }
+        .user-btn{
+            border-radius:50% 0 0 50%;
+        }
+
+
+        .card{
+            width: 90%;
+        }
+
+        .card-container{
+            display: flex;
+            justify-content: center;
+        }
+     </style>
+      
+      <!--User Navigation Bar-->
+        {% if  request.user.is_authenticated %}
+        <nav class="u-nav navbar bg-body-tertiary user-nav " style="height: 1%!important;">
+            <form class="container-fluid justify-content-start">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary user-btn" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"></button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="">Profile</a></li>
+                      <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+                      <li><a class="dropdown-item" href="#">Settings</a></li>
+                    </ul>
+                  </div>
+                <button class="btn btn-outline-success me-2" style="height: 1%!important;" type="button" onclick="script:window.location = '/post';">Create Post</button>
+            </form>
+        </nav>
+
+
+        <div class="offcanvas offcanvas-start user-offcnvs" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">User Pannel</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          
+          <div class="offcanvas-body">
+            <button class="btn btn-primary">@{{ request.user.username }}</button><br>
+          </div>
+        </div>
+        {% endif %}
+    </div>
+
+
+      {% if messages %}
+        {% for message in messages  %}
+          <div class="alert alert-{{ message.tags }}">
+            <span>{{ message }}</span>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      {% block content %}
+        
+      {% endblock content %}
+</body>
+</html>

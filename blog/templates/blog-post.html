@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <style>
+        .content-section form{
+            width: 70%!important;
+            margin-bottom: 10%;
+        }
+
+        .content-section{
+            display: flex !important;
+            justify-content: center !important;
+            margin-top: 10%;
+        }
+
+        textarea{
+            overflow-y: scroll;
+            resize: none !important;
+            height:40% !important;
+        }
+        
+        .post-btn{
+            margin-top: 2%;
+            width: 10%;
+            transition-duration: 0.3s;
+        }
+
+        .btn-dark:hover{
+            background-color: transparent;
+            color: black !important;
+            font-weight: bolder;
+            box-shadow: inset;
+
+            -webkit-box-shadow: 6px 14px 36px -15px rgba(0,0,0,0.69);
+            -moz-box-shadow: 6px 14px 36px -15px rgba(0,0,0,0.69);
+            box-shadow: 6px 14px 36px -15px rgba(0,0,0,0.69);
+        }
+        .btn-div{
+            display: flex !important;
+            justify-content: center !important;
+        }
+    </style>
+
+    <div class="content-section">
+        <form action="#" method="post">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">
+                    Post a Blog
+                </legend>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                    {{ form.title }}
+                </div>
+                        
+                        
+                <div class="input-group">
+                    <span class="input-group-text ">Content</span>
+                    {{ form.content }}
+                </div>
+              
+            </fieldset>
+
+            <div class="btn-div">
+                <button type="submit" class="btn btn-dark post-btn" >Post</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const title_input = document.getElementById('title-input');
+
+        title_input.addEventListener('change', function(){
+            document.title = title_input.value  + " - Blog";
+            if(document.title.charAt(0)=='-' && document.title.charAt(1)==' '){
+                document.title = "My Blog";
+            }
+        })
+    </script>
+
+{% endblock content %}

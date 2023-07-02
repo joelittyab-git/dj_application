@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <head>
+        <link rel="stylesheet" href="{% static 'register.css' %}">
+    </head>
+
+    <style>
+        .errors-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .err-field{
+            color: red;
+        }
+
+        .content-section{
+            margin-bottom: 10%!important;
+        }
+    </style>
+
+    <div class="content-section" style="margin-top: 100px;">
+        <form action="#" method="post" class="reg-post">
+            {% csrf_token %}
+
+
+            {% if form.errors %}
+                <div class="errors-container">
+                    <div class="alert alert-warning d-flex align-items-center w-75 p-3 errors" role="alert">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:" style="height: 18px;">
+                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                        </svg>
+                        <div style="padding-left: 10px;">
+                            {% for field in form %}
+                                {% if field.errors %}
+                                    {{ field.errors }}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">
+                    Join Today
+                </legend>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">@</span>
+                        {{ form.username }}
+                    </div>
+                     <div class="err-field">{{ form.username.errors}}</div>
+
+
+
+                    <div class="input-group mb-3">
+                        {{ form.first_name }}
+                        <span class="input-group-text">-|-</span>
+                        {{ form.last_name }}
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                        {{ form.email }}
+                        <span class="input-group-text" id="basic-addon2">@example.com</span>
+                    </div>
+                    <div class="err-field">
+                        {{ form.email.errors}}
+                    </div>
+                    
+
+                    <div class="row mb-3">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            {{ form.password1 }}
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Confirm Password</label>
+                        <div class="col-sm-10">
+                        {{form.password2}}
+                        <div class="err-field">
+                            {{form.password2.errors}}
+                        </div>
+                        </div>
+                        
+                    </div>
+                    
+                  
+            </fieldset>
+            <br>
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div> 
+        </form>
+    </div>
+{% endblock content %} 

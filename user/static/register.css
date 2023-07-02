@@ -1,0 +1,16 @@
+fieldset{
+    background-color: white !important;
+}
+body, html{
+    background-color: white !important;
+}
+
+.reg-post{
+    width: 80%!important;
+    
+}
+
+.content-section{
+    display: flex !important;
+    justify-content: center !important;
+}
