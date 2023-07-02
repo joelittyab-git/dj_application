@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,9 +43,11 @@ INSTALLED_APPS = [
     'bootstrap5',
     'blog.apps.BlogConfig',
     'user.apps.UserConfig',
-    'rooms.apps.RoomsConfig'
+    'rooms.apps.RoomsConfig',
+    'channels'
     
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,6 +81,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'dj_application.wsgi.application'
+ASGI_APPLICATION = 'dj_application.asgi.application'
 
 
 # Database
@@ -148,4 +152,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #url for login redirect -->> successful 
 LOGIN_REDIRECT_URL = '/'
-APP = '-name-'
