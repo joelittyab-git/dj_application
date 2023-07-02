@@ -148,3 +148,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #url for login redirect -->> successful 
 LOGIN_REDIRECT_URL = '/'
+APP = '-name-'
