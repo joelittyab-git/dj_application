@@ -3,4 +3,5 @@
 migrations/
 rooms/migrations
 blog/migrations
-user/migrations
+user/migrations/*
+**/migrations/
