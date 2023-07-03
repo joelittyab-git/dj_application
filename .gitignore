@@ -5,3 +5,4 @@ rooms/migrations
 blog/migrations
 user/migrations/*
 **/migrations/
+project-admin.go
