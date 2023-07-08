@@ -4,12 +4,15 @@ from .forms import BlogPostForm
 from .models import Post
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+# from django.http import JsonResponse
 
 # Create your views here.
 def home_view(request):
     
     posts = Post.objects.all().reverse()
     
+    # data = db.get()
+    # return JsonResponse(data, safe=False)
     
     return render(
         request,
@@ -18,7 +21,6 @@ def home_view(request):
             'name':'Home',
             'posts': posts.reverse(),
         }
-        
     )
     
 def post_blog_view(request):

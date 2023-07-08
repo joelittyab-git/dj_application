@@ -62,12 +62,10 @@ def login_view(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password')
             email = form.cleaned_data.get('username')
-            try:
-                user_e= User.objects.get(email = email)
-            except Exception as e:
-                pass
+            
             user = authenticate(username = username,password = raw_password)
-            if(user is not None and user.is_authenticated):
+            user_e = authenticate(email = username,password = raw_password)
+            if(user  and user.is_authenticated):
                 login(request=request, user=user)
                 messages.success(request, f'{username} has logged in successfully')
                 return redirect('blog-home')
