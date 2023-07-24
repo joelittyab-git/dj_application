@@ -6,3 +6,4 @@ blog/migrations
 user/migrations/*
 **/migrations/
 project-admin.go
+__credentials/

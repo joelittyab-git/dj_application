@@ -15,7 +15,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+from __credentials import dbcred
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -90,11 +90,11 @@ ASGI_APPLICATION = 'dj_application.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dj_startfd9384',
-        'USER':'root',
-        'PASSWORD':'Tiger@123',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': f'{dbcred.NAME}',
+        'USER':f'{dbcred.USERNAME}',
+        'PASSWORD':f'{dbcred.PASSWORD}',
+        'HOST': f'{dbcred.HOST}',
+        'PORT':f'{dbcred.PORT}',
     }
 }
 
